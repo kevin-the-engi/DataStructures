@@ -209,6 +209,8 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
   this.length--;
 };
 
+module.exports = MyLinkedList;
+
 /**
  * Your MyLinkedList object will be instantiated and called as such:
  * var obj = new MyLinkedList()
