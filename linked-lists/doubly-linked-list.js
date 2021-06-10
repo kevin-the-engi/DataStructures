@@ -50,13 +50,27 @@ DoublyLinkedList.prototype.deleteHead = function() {
 // Insert Last − Adds an element at the end of the list.
 
 DoublyLinkedList.prototype.addAtTail = function(value) {
+  if (this.length === 0) {
+    return this.addAtHead(value);
+  }
 
+  let node = this.createNode(value);
+  let prevTail = this.tail;
+
+  this.tail = node;
+  prevTail.next = node;
+  node.prev = prevTail;
+  this.length++;
 }
 
 // Delete Last − Deletes an element from the end of the list.
 
 DoublyLinkedList.prototype.deleteTail = function() {
+  let prevNode = this.tail.prev;
 
+  this.tail = prevNode;
+  prevNode.next = null;
+  this.length--;
 }
 
 // Insert After − Adds an element after an item of the list.
