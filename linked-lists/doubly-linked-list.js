@@ -24,13 +24,27 @@ DoublyLinkedList.prototype.get = function(index) {
 // Insertion − Adds an element at the beginning of the list.
 
 DoublyLinkedList.prototype.addAtHead = function(value) {
+  const node = this.createNode(value);
 
+  if (this.head) {
+    node.next = this.head;
+    this.head.prev = node;
+  } else {
+    this.tail = node;
+  }
+
+  this.head = node;
+  this.length++;
 }
 
 // Deletion − Deletes an element at the beginning of the list.
 
 DoublyLinkedList.prototype.deleteHead = function() {
-
+  if (this.head) {
+    this.head = this.head.next;
+    this.head.prev = null;
+    this.length--;
+  }
 }
 
 // Insert Last − Adds an element at the end of the list.
