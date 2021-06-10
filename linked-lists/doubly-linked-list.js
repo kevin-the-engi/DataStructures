@@ -18,7 +18,27 @@ const DoublyLinkedList = function() {
 }
 
 DoublyLinkedList.prototype.get = function(index) {
+  if (index >= this.length || index < 0 || !index) {
+    return -1;
+  }
 
+  if (index === 0) {
+    return this.head.value;
+  }
+
+  if (index === this.length - 1) {
+    return this.tail.value;
+  }
+
+  let head = this.head;
+  let i = 0;
+
+  while (head !== null && i < index) {
+    head = head.next;
+    i++;
+  }
+
+  return head.value;
 }
 
 // Insertion − Adds an element at the beginning of the list.
@@ -88,11 +108,31 @@ DoublyLinkedList.prototype.deleteAtIndex = function(index, value) {
 // Display forward − Displays the complete list in a forward manner.
 
 DoublyLinkedList.prototype.displayForward = function() {
+  let head = this.head;
 
+  return this.traversal(head, 1);
 }
 
 // Display backward − Displays the complete list in a backward manner.
 
 DoublyLinkedList.prototype.displayBackward = function() {
+  let tail = this.tail;
 
+  return this.traversal(tail, -1);
+}
+
+DoublyLinkedList.prototype.traversal = function(node, direction) {
+  let values = [];
+
+  while (node !== null) {
+    values.push(node.value);
+
+    if (direction === 1) {
+      node = node.next;
+    } else {
+      node = node.prev;
+    }
+  }
+
+  return values;
 }
