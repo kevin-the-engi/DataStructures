@@ -96,7 +96,34 @@ DoublyLinkedList.prototype.deleteTail = function() {
 // Insert After − Adds an element after an item of the list.
 
 DoublyLinkedList.prototype.insertAtIndex = function(index, value) {
+  if (index > this.length || index < 0 || index === undefined) {
+    return;
+  }
 
+  if (index === 0) {
+    return this.addAtHead(value);
+  }
+
+  if (index === this.length) {
+    return this.addAtTail(value);
+  }
+
+  let node = this.createNode(value);
+  let head = this.head;
+  let i = 0;
+
+  while (head !== null && i < index) {
+    head = head.next;
+    i++;
+  }
+
+  let prevNode = head.prev;
+
+  prevNode.next = node;
+  node.prev = head.prev;
+  node.next = head;
+  head.prev = node;
+  this.length++;
 }
 
 // Delete − Deletes an element from the list using the key.
