@@ -128,8 +128,45 @@ DoublyLinkedList.prototype.insertAtIndex = function(index, value) {
 
 // Delete − Deletes an element from the list using the key.
 
-DoublyLinkedList.prototype.deleteAtIndex = function(index, value) {
+DoublyLinkedList.prototype.deleteAtIndex = function(index) {
+  if (index >= this.length || index < 0 || index === undefined || this.length === 0) {
+    return;
+  }
 
+  if (index === 0) {
+    if (this.length > 1) {
+      this.head.next.prev = null;
+    } else {
+      this.tail = null;
+    }
+
+    this.head = this.head.next;
+    this.length--;
+
+    return;
+  }
+
+  if (index === this.length - 1) {
+    this.tail = this.tail.prev;
+    this.tail.next = null;
+    this.length--;
+
+    return;
+  }
+
+  let head = this.head;
+  let i = 0;
+
+  while (head !== null && i < index) {
+    head = head.next;
+    i++;
+  }
+
+  let nodeToBeDeleted = head;
+
+  nodeToBeDeleted.prev.next = nodeToBeDeleted.next;
+  nodeToBeDeleted.next.prev = nodeToBeDeleted.prev;
+  this.length--;
 }
 
 // Display forward − Displays the complete list in a forward manner.
